@@ -1,0 +1,40 @@
+{
+  "name": "symptrail — private symptom journal",
+  "short_name": "symptrail",
+  "description": "A private, offline symptom tracker. Log symptoms, severity and triggers, see trends, and print a clean report for your doctor.",
+  "id": "/symptrail/",
+  "start_url": "/symptrail/",
+  "scope": "/symptrail/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f2ec",
+  "theme_color": "#2e7d74",
+  "lang": "en",
+  "categories": ["health", "medical", "lifestyle", "productivity"],
+  "icons": [
+    {
+      "src": "/symptrail/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/symptrail/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/symptrail/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/symptrail/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
