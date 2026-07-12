@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  * { box-sizing: border-box; }
+  .og {
+    width: 1200px; height: 630px;
+    background: #f5f2ec;
+    background-image:
+      radial-gradient(circle at 14% 14%, rgba(46,125,116,0.07), transparent 44%),
+      radial-gradient(circle at 90% 86%, rgba(196,105,74,0.06), transparent 48%);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1e2a32;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    padding: 68px 72px;
+  }
+  /* left column */
+  .left { display: flex; flex-direction: column; height: 100%; }
+  .brand { display: flex; align-items: center; gap: 16px; }
+  .brand svg { width: 46px; height: 46px; }
+  .brand .name { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; }
+  .brand .name b { color: #235f58; }
+  .brand .name span { color: #1e2a32; }
+
+  h1 {
+    font-size: 62px; line-height: 1.06; letter-spacing: -0.02em;
+    font-weight: 700; margin: 46px 0 0; max-width: 640px;
+  }
+  h1 .accent { color: #235f58; }
+  .lede {
+    font-size: 25px; line-height: 1.42; color: #46545c;
+    margin: 26px 0 0; max-width: 600px;
+  }
+  .foot {
+    margin-top: auto; display: flex; align-items: center; gap: 14px;
+    font-size: 20px; color: #235f58; font-weight: 600;
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: #e3efec; border: 1px solid #b9d6cf;
+    color: #235f58; padding: 9px 16px; border-radius: 999px;
+    font-size: 19px; font-weight: 600;
+  }
+  .pill svg { width: 20px; height: 20px; }
+  .dot { color: #c4694a; }
+
+  /* right column: a small "report card" mock on a spine */
+  .right { position: relative; }
+  .spine {
+    position: absolute; left: 26px; top: 8px; bottom: 8px; width: 3px;
+    background: #cfc8b8; border-radius: 3px;
+  }
+  .node {
+    position: absolute; left: 18px; width: 19px; height: 19px; border-radius: 50%;
+    background: #2e7d74; border: 3px solid #f5f2ec;
+  }
+  .n1 { top: 34px; }
+  .n2 { top: 172px; width: 25px; height: 25px; left: 15px; background: #c4694a; }
+  .n3 { top: 330px; }
+  .n4 { top: 470px; }
+  .card {
+    position: absolute; left: 66px; right: 0;
+    background: #fffdf9; border: 1px solid #ddd6c8; border-radius: 14px;
+    box-shadow: 0 10px 34px -18px rgba(30,42,50,0.4);
+    padding: 16px 18px;
+  }
+  .c1 { top: 20px; }
+  .c2 { top: 158px; border-color: #e2b9a9; }
+  .c3 { top: 316px; }
+  .card .row { display: flex; align-items: center; justify-content: space-between; }
+  .card .t { font-size: 18px; font-weight: 700; color: #1e2a32; }
+  .card .sev {
+    font-variant-numeric: tabular-nums; font-size: 15px; font-weight: 700;
+    color: #235f58; background: #e3efec; padding: 3px 9px; border-radius: 7px;
+  }
+  .c2 .sev { color: #a24a2f; background: #f3e0d8; }
+  .card .meta { font-size: 14px; color: #6b7880; margin-top: 7px; }
+  .card .tags { margin-top: 10px; display: flex; gap: 6px; }
+  .card .tag { font-size: 12.5px; color: #46545c; background: #efeae0; border-radius: 6px; padding: 3px 8px; }
+</style>
+</head>
+<body>
+  <div class="og">
+    <div class="left">
+      <div class="brand">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="8" y1="4" x2="8" y2="36" stroke="#2e7d74" stroke-width="2.6" stroke-linecap="round"/>
+          <circle cx="8" cy="10" r="3.4" fill="#2e7d74"/>
+          <circle cx="8" cy="21" r="4.8" fill="#2e7d74"/>
+          <circle cx="8" cy="32" r="2.6" fill="#2e7d74"/>
+          <path d="M17 21h6l2.5-6 3.5 12 2.5-6h4" stroke="#c4694a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="name"><b>sympt</b><span>rail</span></div>
+      </div>
+
+      <h1>Keep a symptom diary you can actually <span class="accent">hand your doctor</span>.</h1>
+      <p class="lede">Log symptoms, severity and triggers over time. Print a clean report for your appointment.</p>
+
+      <div class="foot">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/></svg>
+          Private &amp; offline — data never leaves your device
+        </span>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="spine"></div>
+      <span class="node n1"></span>
+      <span class="node n2"></span>
+      <span class="node n3"></span>
+      <span class="node n4"></span>
+
+      <div class="card c1">
+        <div class="row"><span class="t">Headache</span><span class="sev">4</span></div>
+        <div class="meta">Tue · 2 h · left temple</div>
+        <div class="tags"><span class="tag">poor sleep</span><span class="tag">screen time</span></div>
+      </div>
+      <div class="card c2">
+        <div class="row"><span class="t">Migraine</span><span class="sev">8</span></div>
+        <div class="meta">Wed · 5 h · behind eyes</div>
+        <div class="tags"><span class="tag">skipped meal</span><span class="tag">ibuprofen</span></div>
+      </div>
+      <div class="card c3">
+        <div class="row"><span class="t">Nausea</span><span class="sev">3</span></div>
+        <div class="meta">Thu · 40 min</div>
+        <div class="tags"><span class="tag">after coffee</span></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

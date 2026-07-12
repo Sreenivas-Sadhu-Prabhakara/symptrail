@@ -431,6 +431,9 @@ input[type="range"]:focus-visible { outline-offset: 4px; }
   display: flex; align-items: flex-start; justify-content: center;
   padding: 24px 16px; overflow: auto;
 }
+/* The [hidden] attribute must win over the class's display:flex/-block above,
+   otherwise hidden panels (e.g. the report modal) show on first paint. */
+[hidden] { display: none !important; }
 body.modal-open { overflow: hidden; }
 .modal-panel {
   background: var(--paper); border-radius: var(--radius); width: 100%; max-width: 860px;

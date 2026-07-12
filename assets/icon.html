@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  .icon {
+    width: 512px; height: 512px;
+    background: #235f58;
+    background-image:
+      radial-gradient(circle at 30% 22%, #2e7d74, #235f58 62%),
+      radial-gradient(circle at 82% 88%, rgba(196,105,74,0.28), transparent 55%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  /* rounded plate for maskable safe-zone friendliness */
+  svg { display: block; }
+</style>
+</head>
+<body>
+  <div class="icon">
+    <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- vertical timeline spine -->
+      <line x1="150" y1="96" x2="150" y2="416" stroke="#f5f2ec" stroke-width="18" stroke-linecap="round" opacity="0.92"/>
+      <!-- severity nodes on the spine -->
+      <circle cx="150" cy="150" r="26" fill="#f5f2ec"/>
+      <circle cx="150" cy="256" r="40" fill="#f5f2ec"/>
+      <circle cx="150" cy="150" r="12" fill="#235f58"/>
+      <circle cx="150" cy="256" r="20" fill="#235f58"/>
+      <circle cx="150" cy="362" r="20" fill="#f5f2ec"/>
+      <!-- waveform threading rightward, in clay accent -->
+      <path d="M196 256 h44 l30 -78 46 156 30 -78 h56"
+            stroke="#e08a6e" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </svg>
+  </div>
+</body>
+</html>

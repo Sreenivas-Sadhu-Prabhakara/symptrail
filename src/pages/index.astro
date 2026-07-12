@@ -2,10 +2,100 @@
 const base = import.meta.env.BASE_URL;
 // Trailing-slash-safe asset helper: BASE_URL is "/symptrail/" in build.
 const asset = (p) => base.replace(/\/$/, '') + '/' + p.replace(/^\//, '');
-const title = 'symptrail — private symptom journal & tracker for your doctor';
+const title = 'symptrail — Private Symptom Tracker & Journal for Doctors';
 const description =
-  'A private, offline symptom tracker. Log symptoms, severity and triggers over time, see trends, and print a clean summary report for your doctor. Your health data never leaves your device.';
-const canonical = new URL(base, Astro.site ?? 'https://sreenivas-sadhu-prabhakara.github.io').href;
+  'Free, private symptom tracker. Log symptoms, severity and triggers, spot trends, and print a clean report for your doctor. Data never leaves your device.';
+const site = Astro.site ?? new URL('https://sreenivas-sadhu-prabhakara.github.io');
+// Directory URL: keep the trailing slash so canonical, og:url, sitemap and manifest all agree.
+const canonical = new URL(base.endsWith('/') ? base : base + '/', site).href;
+const ogImage = new URL(asset('og.png'), site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      name: 'symptrail',
+      url: canonical,
+      applicationCategory: 'HealthApplication',
+      operatingSystem: 'Any (web browser)',
+      browserRequirements: 'Requires JavaScript and a modern browser.',
+      description:
+        'A private, offline symptom journal. Log symptoms, severity and triggers, view trends, and print a doctor-ready report. All data is stored only in your browser and never leaves your device.',
+      image: ogImage,
+      isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      featureList: [
+        'Log symptoms with 0–10 severity, duration, body area, triggers and medications',
+        'Chronological timeline grouped by day',
+        'Severity trends charted per symptom, drawn entirely client-side',
+        'Printable doctor’s report for any date range (Save as PDF)',
+        'JSON backup export and import',
+        'Works fully offline; data stored only in the browser',
+      ],
+      permissions: 'No network access; no account required.',
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Is symptrail a free symptom tracker I can use without an account?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Yes. symptrail is completely free with no sign-up. There is no account and no server — you just open the page and start logging. Your entries are saved in your own browser using localStorage.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Where is my symptom data stored, and is it private?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Everything is stored only in your browser with localStorage. There is no back end, and the page ships a strict Content-Security-Policy that blocks all outbound network connections (connect-src ’none’), so your health data physically cannot leave the device.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How do I make a symptom report to give my doctor?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Choose “Report for doctor”, pick a date range, then print. Select “Save as PDF” in the print dialog to get a clean file. The report shows a summary table — occurrences, average and peak severity, and last seen per symptom — followed by every entry in order.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Does the symptom tracker work offline?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Yes. Once the page has loaded it needs no connection at all. You can add entries, view trends and generate reports fully offline, on a plane or with no signal.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What do the 0–10 severity ratings mean?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Severity is your own 0–10 rating where 0 is “none” and 10 is the worst you can imagine. It is subjective by design — it captures how you experienced each episode, which is what is useful to track over time and discuss with a clinician.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Can I back up my symptom log or move it to another device?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text:
+              'Yes. Use “Export backup (JSON)” to save a file, then “Import backup” in another browser or device to restore it. Because data lives only in one browser, the backup export is how you keep it safe or transfer it.',
+          },
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <html lang="en">
@@ -27,14 +117,26 @@ const canonical = new URL(base, Astro.site ?? 'https://sreenivas-sadhu-prabhakar
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={asset('favicon.svg')} />
     <link rel="icon" href={asset('favicon.ico')} sizes="any" />
+    <link rel="apple-touch-icon" href={asset('apple-touch-icon.png')} />
+    <link rel="manifest" href={asset('manifest.webmanifest')} />
     <link rel="stylesheet" href={asset('styles.css')} />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="symptrail — private symptom journal for your doctor" />
+    <meta property="og:site_name" content="symptrail" />
+    <meta property="og:title" content="symptrail — private symptom tracker & journal for your doctor" />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="symptrail — a private, offline symptom journal that prints a report for your doctor" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="symptrail — private symptom tracker & journal for your doctor" />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="symptrail — a private, offline symptom journal that prints a report for your doctor" />
     <meta name="generator" content={Astro.generator} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <a class="skip" href="#quickadd">Skip to add an entry</a>
@@ -280,33 +382,39 @@ const canonical = new URL(base, Astro.site ?? 'https://sreenivas-sadhu-prabhakar
         <p class="faq-sub">The short version: it's a private symptom diary that prints a report for your doctor.</p>
 
         <details>
-          <summary>Where is my data stored?</summary>
+          <summary>Is symptrail a free symptom tracker I can use without an account?</summary>
           <div class="faq-a">
-            <p>Only in this browser, using <code>localStorage</code>. There is no server and no account. Nothing you type is uploaded — the page's security policy blocks all network requests. If you clear your browser data or switch devices, use an exported backup to restore your log.</p>
+            <p>Yes. symptrail is completely free with no sign-up. There is no account and no server — you just open the page and start logging. Your entries are saved in your own browser using <code>localStorage</code>.</p>
           </div>
         </details>
         <details>
-          <summary>How do I give the report to my doctor?</summary>
+          <summary>Where is my symptom data stored, and is it private?</summary>
           <div class="faq-a">
-            <p>Choose <strong>Report for doctor</strong>, pick a date range, then print. In the print dialog choose “Save as PDF” to get a clean file, or print it on paper. The report has a summary table (occurrences, average and peak severity, last seen) followed by every entry in order.</p>
+            <p>Everything is stored only in your browser with <code>localStorage</code>. There is no back end, and the page ships a strict Content-Security-Policy that blocks all outbound network connections (<code>connect-src 'none'</code>), so your health data physically cannot leave the device.</p>
           </div>
         </details>
         <details>
-          <summary>Is this a medical or diagnostic tool?</summary>
+          <summary>How do I make a symptom report to give my doctor?</summary>
           <div class="faq-a">
-            <p>No. symptrail is a personal record-keeping aid to help you remember and communicate what you've been experiencing. It does not diagnose anything and is not a substitute for professional care. Always talk to a qualified health professional about your symptoms.</p>
+            <p>Choose <strong>Report for doctor</strong>, pick a date range, then print. Select “Save as PDF” in the print dialog to get a clean file. The report shows a summary table — occurrences, average and peak severity, and last seen per symptom — followed by every entry in order.</p>
           </div>
         </details>
         <details>
-          <summary>What do the severity numbers mean?</summary>
+          <summary>Does the symptom tracker work offline?</summary>
+          <div class="faq-a">
+            <p>Yes. Once the page has loaded it needs no connection at all. You can add entries, view trends and generate reports fully offline, on a plane or with no signal.</p>
+          </div>
+        </details>
+        <details>
+          <summary>What do the 0–10 severity ratings mean?</summary>
           <div class="faq-a">
             <p>Severity is your own 0–10 rating, where 0 is “none” and 10 is the worst you can imagine. It's subjective by design — it captures how <em>you</em> experienced each episode, which is exactly what's useful to track over time and discuss with a clinician.</p>
           </div>
         </details>
         <details>
-          <summary>Does it work offline?</summary>
+          <summary>Can I back up my symptom log or move it to another device?</summary>
           <div class="faq-a">
-            <p>Yes. Once the page has loaded it needs no connection at all. You can add entries, view trends and generate reports fully offline.</p>
+            <p>Yes. Use <strong>Export backup (JSON)</strong> to save a file, then <strong>Import backup</strong> in another browser or device to restore it. Because data lives only in one browser, the backup export is how you keep it safe or transfer it.</p>
           </div>
         </details>
       </section>
